@@ -49,18 +49,18 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     flex: 1,
-    alignItems: 'center',
+    paddingHorizontal: 16,
     justifyContent: 'center',
   },
   divider: {
     height: 1,
     margin: 20,
-    width: '80%',
     backgroundColor: '#cccccc',
   },
   logo: {
-    width: 90,
-    height: 90,
+    scaleX: 0.7,
+    scaleY: 0.7,
+    alignSelf: 'center',
     marginBottom: 40,
   },
 });

@@ -130,7 +130,7 @@ class SahhaReactNativeModule(reactContext: ReactApplicationContext) :
   @ReactMethod
   fun postDemographic(demographic: ReadableMap, callback: Callback) {
 
-    val age: Int? = demographic.getInt("age")
+    val age: Int? = processAge(demographic)
     val gender: String? = demographic.getString("gender")
     val country: String? = demographic.getString("country")
     val birthCountry: String? = demographic.getString("birthCountry")
@@ -165,6 +165,14 @@ class SahhaReactNativeModule(reactContext: ReactApplicationContext) :
       } else {
         callback.invoke(null, success)
       }
+    }
+  }
+
+  private fun processAge(demographic: ReadableMap): Int? {
+    return try {
+      demographic.getInt("age")
+    } catch (e: Exception) {
+      null
     }
   }
 

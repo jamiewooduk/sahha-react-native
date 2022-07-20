@@ -29,12 +29,10 @@ export default function SleepView() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={{ fontSize: 18, fontWeight: 'bold' }}>SENSOR STATUS</Text>
-      <Picker
-        style={{ height: 200, width: '80%' }}
-        enabled={false}
-        selectedValue={sensorStatus}
-      >
+      <Text style={{ fontSize: 18, fontWeight: 'bold', alignSelf: 'center' }}>
+        SENSOR STATUS
+      </Text>
+      <Picker enabled={false} selectedValue={sensorStatus}>
         <Picker.Item label="Pending" value={0} />
         <Picker.Item label="Unavailable" value={1} />
         <Picker.Item label="Disabled" value={2} />
@@ -74,13 +72,12 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: `white`,
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
+    padding: 16,
   },
   divider: {
     height: 1,
     margin: 20,
-    width: '80%',
     backgroundColor: '#cccccc',
   },
 });

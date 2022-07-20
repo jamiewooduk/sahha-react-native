@@ -24,7 +24,11 @@ export default function ProfileView() {
       <Text style={{ textAlign: 'center', paddingBottom: 20 }}>
         Include source data in analysis
       </Text>
-      <Switch onValueChange={toggleSwitch} value={isSwitchEnabled} />
+      <Switch
+        onValueChange={toggleSwitch}
+        value={isSwitchEnabled}
+        style={{ alignSelf: 'center' }}
+      />
       <View style={styles.divider} />
       <Button
         title="ANALYZE PREVIOUS WEEK"
@@ -75,13 +79,12 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: `white`,
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
+    padding: 16,
   },
   divider: {
     height: 1,
     margin: 20,
-    width: '80%',
     backgroundColor: '#cccccc',
   },
 });
