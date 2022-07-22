@@ -11,7 +11,6 @@ export default function SensorDataView() {
     <View style={styles.container}>
       <Text style={{ fontSize: 18, fontWeight: 'bold' }}>SENSOR DATA</Text>
       <Picker
-        style={{ height: 200, width: '80%' }}
         selectedValue={sahhaSensor}
         onValueChange={(sensor) => {
           setSensor(sensor);
@@ -37,7 +36,7 @@ export default function SensorDataView() {
           });
         }}
       />
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView style={{ marginVertical: 16 }}>
         <Text>{sensorData}</Text>
       </ScrollView>
     </View>
@@ -48,13 +47,12 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: `white`,
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
+    padding: 16,
   },
   divider: {
     height: 1,
     margin: 20,
-    width: '80%',
     backgroundColor: '#cccccc',
   },
 });
