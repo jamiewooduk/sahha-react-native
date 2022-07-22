@@ -34,6 +34,11 @@ export default function App() {
 
   const settings = {
     environment: SahhaEnvironment.development,
+    notificationSettings: {
+      icon: 'ic_test',
+      title: 'Test Title',
+      shortDescription: 'Test description.',
+    },
   };
 
   Sahha.configure(settings, (error: string, success: boolean) => {

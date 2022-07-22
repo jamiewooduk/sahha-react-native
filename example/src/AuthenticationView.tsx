@@ -89,7 +89,7 @@ export default function AuthenticationView() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text>
+      <Text style={styles.authStatus}>
         {isAuth ? 'You are authenticated' : 'You are not authenticated'}
       </Text>
       <View style={styles.divider} />
@@ -120,20 +120,21 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flex: 1,
     width: '100%',
-    alignItems: 'center',
+    paddingHorizontal: 16,
     justifyContent: 'center',
   },
   divider: {
     height: 1,
     margin: 20,
-    width: '80%',
     backgroundColor: '#cccccc',
   },
   input: {
     height: 40,
     margin: 12,
-    width: '80%',
     borderWidth: 1,
     padding: 10,
+  },
+  authStatus: {
+    alignSelf: 'center',
   },
 });

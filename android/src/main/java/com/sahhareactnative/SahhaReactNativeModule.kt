@@ -3,6 +3,8 @@ package com.sahhareactnative
 import android.util.Log
 import com.facebook.react.bridge.*
 import com.google.gson.Gson
+import sdk.sahha.android.common.SahhaConverterUtility
+import sdk.sahha.android.domain.model.config.SahhaNotificationConfiguration
 import sdk.sahha.android.source.*
 import java.util.*
 
@@ -15,7 +17,6 @@ class SahhaReactNativeModule(reactContext: ReactApplicationContext) :
 
   @ReactMethod
   fun configure(settings: ReadableMap, callback: Callback) {
-
     var environment: String? = settings.getString("environment")
     if (environment == null) {
       callback.invoke("Sahha.configure() environment parameter is missing", null)
@@ -28,6 +29,30 @@ class SahhaReactNativeModule(reactContext: ReactApplicationContext) :
       callback.invoke("Sahha.configure() environment parameter is not valid", null)
       return
     }
+
+    // Notification config
+    var sahhaNotificationConfiguration: SahhaNotificationConfiguration? = null
+    try {
+      settings.getMap("notificationSettings")?.also { nSettings ->
+        val icon = nSettings.getString("icon")
+        val title = nSettings.getString("title")
+        val shortDescription = nSettings.getString("shortDescription")
+
+        sahhaNotificationConfiguration = SahhaNotificationConfiguration(
+          SahhaConverterUtility.stringToDrawableResource(
+            reactApplicationContext,
+            icon
+          ),
+          title,
+          shortDescription,
+        )
+      }
+    } catch (e: IllegalArgumentException) {
+      callback.invoke("Sahha.configure() notification config is not valid", null)
+      return
+    }
+    // Notification config ends
+
     var postSensorDataManually: Boolean = false
     if (settings.hasKey("postSensorDataManually")) {
       postSensorDataManually = settings.getBoolean("postSensorDataManually")
@@ -40,6 +65,7 @@ class SahhaReactNativeModule(reactContext: ReactApplicationContext) :
     if (sensors == null) {
       sahhaSettings = SahhaSettings(
         environment = sahhaEnvironment,
+        notificationSettings = sahhaNotificationConfiguration,
         framework = SahhaFramework.react_native,
         postSensorDataManually = postSensorDataManually
       )
@@ -52,6 +78,7 @@ class SahhaReactNativeModule(reactContext: ReactApplicationContext) :
         }
         sahhaSettings = SahhaSettings(
           environment = sahhaEnvironment,
+          notificationSettings = sahhaNotificationConfiguration,
           framework = SahhaFramework.react_native,
           sensors = sahhaSensors,
           postSensorDataManually = postSensorDataManually
@@ -103,7 +130,7 @@ class SahhaReactNativeModule(reactContext: ReactApplicationContext) :
   @ReactMethod
   fun postDemographic(demographic: ReadableMap, callback: Callback) {
 
-    val age: Int? = demographic.getInt("age")
+    val age: Int? = processAge(demographic)
     val gender: String? = demographic.getString("gender")
     val country: String? = demographic.getString("country")
     val birthCountry: String? = demographic.getString("birthCountry")
@@ -138,6 +165,14 @@ class SahhaReactNativeModule(reactContext: ReactApplicationContext) :
       } else {
         callback.invoke(null, success)
       }
+    }
+  }
+
+  private fun processAge(demographic: ReadableMap): Int? {
+    return try {
+      demographic.getInt("age")
+    } catch (e: Exception) {
+      null
     }
   }
 
