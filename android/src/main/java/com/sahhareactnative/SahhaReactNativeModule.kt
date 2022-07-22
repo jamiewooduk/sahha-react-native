@@ -2,13 +2,12 @@ package com.sahhareactnative
 
 import android.util.Log
 import com.facebook.react.bridge.*
-import com.facebook.react.modules.core.PermissionAwareActivity
 import com.google.gson.Gson
 import sdk.sahha.android.source.*
-import java.time.LocalDateTime
 import java.util.*
 
-class SahhaReactNativeModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
+class SahhaReactNativeModule(reactContext: ReactApplicationContext) :
+  ReactContextBaseJavaModule(reactContext) {
 
   override fun getName(): String {
     return "SahhaReactNative"
@@ -40,8 +39,8 @@ class SahhaReactNativeModule(reactContext: ReactApplicationContext) : ReactConte
 
     if (sensors == null) {
       sahhaSettings = SahhaSettings(
-        sahhaEnvironment,
-        SahhaFramework.react_native,
+        environment = sahhaEnvironment,
+        framework = SahhaFramework.react_native,
         postSensorDataManually = postSensorDataManually
       )
     } else {
@@ -52,10 +51,10 @@ class SahhaReactNativeModule(reactContext: ReactApplicationContext) : ReactConte
           sahhaSensors.add(sensor)
         }
         sahhaSettings = SahhaSettings(
-          sahhaEnvironment,
-          SahhaFramework.react_native,
-          sahhaSensors,
-          postSensorDataManually
+          environment = sahhaEnvironment,
+          framework = SahhaFramework.react_native,
+          sensors = sahhaSensors,
+          postSensorDataManually = postSensorDataManually
         )
       } catch (e: IllegalArgumentException) {
         callback.invoke("Sahha.configure() sensor parameter is not valid", null)
@@ -117,7 +116,21 @@ class SahhaReactNativeModule(reactContext: ReactApplicationContext) : ReactConte
     val locale: String? = demographic.getString("locale")
     val livingArrangement: String? = demographic.getString("livingArrangement")
     val birthDate: String? = demographic.getString("birthDate")
-    var sahhaDemographic = SahhaDemographic(age, gender, country, birthCountry, ethnicity, occupation, industry, incomeRange, education, relationship, locale, livingArrangement, birthDate)
+    var sahhaDemographic = SahhaDemographic(
+      age,
+      gender,
+      country,
+      birthCountry,
+      ethnicity,
+      occupation,
+      industry,
+      incomeRange,
+      education,
+      relationship,
+      locale,
+      livingArrangement,
+      birthDate
+    )
 
     Sahha.postDemographic(sahhaDemographic) { error, success ->
       if (error != null) {
@@ -159,6 +172,19 @@ class SahhaReactNativeModule(reactContext: ReactApplicationContext) : ReactConte
         } else {
           callback.invoke(null, sensorStatus.ordinal)
         }
+      }
+    } catch (e: IllegalArgumentException) {
+      callback.invoke("Sahha sensor parameter is not valid", null)
+    }
+  }
+
+  @ReactMethod
+  fun getSensorData(sensor: String, callback: Callback) {
+    try {
+      val sahhaSensor = SahhaSensor.valueOf(sensor)
+      Sahha.getSensorData(sahhaSensor) { error, success ->
+        error?.also { callback(it, null) }
+        success?.also { callback(null, it) }
       }
     } catch (e: IllegalArgumentException) {
       callback.invoke("Sahha sensor parameter is not valid", null)
@@ -234,7 +260,7 @@ class SahhaReactNativeModule(reactContext: ReactApplicationContext) : ReactConte
       val sahhaEndDate = Date(endDate.toLong())
       Log.d("Sahha", "sahhaStartDate $sahhaStartDate")
       Log.d("Sahha", "sahhaEndDate $sahhaEndDate")
-     Sahha.analyze(includeSourceData, Pair(sahhaStartDate, sahhaEndDate)) { error, value ->
+      Sahha.analyze(includeSourceData, Pair(sahhaStartDate, sahhaEndDate)) { error, value ->
         if (error != null) {
           callback.invoke(error, null)
         } else if (value != null) {

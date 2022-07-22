@@ -41,6 +41,13 @@ export default function HomeView({ navigation }) {
           navigation.navigate(PageTitle.ANALYZATION.toString());
         }}
       />
+      <View style={styles.divider} />
+      <Button
+        title={PageTitle.SENSOR_DATA.toString()}
+        onPress={() => {
+          navigation.navigate(PageTitle.SENSOR_DATA.toString());
+        }}
+      />
     </ScrollView>
   );
 }

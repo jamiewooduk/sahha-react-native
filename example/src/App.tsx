@@ -8,6 +8,7 @@ import ProfileView from './ProfileView';
 import PedometerView from './PedometerView';
 import AnalyzationView from './AnalyzationView';
 import SleepView from './SleepView';
+import SensorDataView from './SensorDataView';
 //const { message } = Sahha.getConstants();
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,7 @@ export enum PageTitle {
   SLEEP = 'SLEEP',
   PEDOMETER = 'PEDOMETER',
   ANALYZATION = 'ANALYZATION',
+  SENSOR_DATA = 'SENSOR DATA',
 }
 
 export default function App() {
@@ -73,6 +75,10 @@ export default function App() {
         <Stack.Screen
           name={PageTitle.ANALYZATION.toString()}
           component={AnalyzationView}
+        />
+        <Stack.Screen
+          name={PageTitle.SENSOR_DATA.toString()}
+          component={SensorDataView}
         />
       </Stack.Navigator>
     </NavigationContainer>
