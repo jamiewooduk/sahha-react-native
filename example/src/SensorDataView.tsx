@@ -5,7 +5,7 @@ import Sahha, { SahhaSensor } from 'sahha-react-native';
 
 export default function SensorDataView() {
   const [sahhaSensor, setSensor] = useState<string>(SahhaSensor.sleep);
-  const [sensorData, setData] = useState<string>('');
+  const [sensorData, setData] = useState<string>('Results shown here');
 
   return (
     <View style={styles.container}>
