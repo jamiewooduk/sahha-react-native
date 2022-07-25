@@ -21,7 +21,6 @@ export default function HomeView({ navigation }) {
       >
         <Text style={styles.touchableText}>{PageTitle.AUTHENTICATION}</Text>
       </TouchableOpacity>
-      {/* <View style={styles.divider} /> */}
       <TouchableOpacity
         onPress={() => {
           navigation.navigate(PageTitle.PROFILE);
@@ -30,7 +29,6 @@ export default function HomeView({ navigation }) {
       >
         <Text style={styles.touchableText}>{PageTitle.PROFILE}</Text>
       </TouchableOpacity>
-      {/* <View style={styles.divider} /> */}
       <TouchableOpacity
         onPress={() => {
           navigation.navigate(PageTitle.SLEEP);
@@ -39,7 +37,6 @@ export default function HomeView({ navigation }) {
       >
         <Text style={styles.touchableText}>{PageTitle.SLEEP}</Text>
       </TouchableOpacity>
-      {/* <View style={styles.divider} /> */}
       <TouchableOpacity
         onPress={() => {
           navigation.navigate(PageTitle.PEDOMETER);
@@ -48,7 +45,6 @@ export default function HomeView({ navigation }) {
       >
         <Text style={styles.touchableText}>{PageTitle.PEDOMETER}</Text>
       </TouchableOpacity>
-      {/* <View style={styles.divider} /> */}
       <TouchableOpacity
         onPress={() => {
           navigation.navigate(PageTitle.ANALYZATION);
@@ -57,15 +53,14 @@ export default function HomeView({ navigation }) {
       >
         <Text style={styles.touchableText}>{PageTitle.ANALYZATION}</Text>
       </TouchableOpacity>
-      {/* <View style={styles.divider} /> */}
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => {
           navigation.navigate(PageTitle.SENSOR_DATA);
         }}
         style={styles.touchable}
       >
         <Text style={styles.touchableText}>{PageTitle.SENSOR_DATA}</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </ScrollView>
   );
 }
