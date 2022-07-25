@@ -13,13 +13,13 @@ import SensorDataView from './SensorDataView';
 const Stack = createNativeStackNavigator();
 
 export enum PageTitle {
-  HOME = 'HOME',
-  AUTHENTICATION = 'AUTHENTICATION',
-  PROFILE = 'PROFILE',
-  SLEEP = 'SLEEP',
-  PEDOMETER = 'PEDOMETER',
-  ANALYZATION = 'ANALYZATION',
-  SENSOR_DATA = 'SENSOR DATA',
+  HOME = 'Sahha Demo',
+  AUTHENTICATION = 'Authentication',
+  PROFILE = 'Profile',
+  SLEEP = 'Sleep',
+  PEDOMETER = 'Pedometer',
+  ANALYZATION = 'Analyzation',
+  SENSOR_DATA = 'Sensor Data',
 }
 
 export default function App() {
@@ -59,7 +59,7 @@ export default function App() {
           },
           headerTintColor: '#fff',
           headerTitleStyle: {
-            fontWeight: 'bold',
+            fontFamily: 'Rubik-Regular',
           },
         }}
       >

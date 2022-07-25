@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, ScrollView, Button } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  ScrollView,
+  Button,
+  TouchableOpacity,
+} from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import Sahha, { SahhaSensor } from 'sahha-react-native';
 
@@ -9,7 +16,9 @@ export default function SensorDataView() {
 
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 18, fontWeight: 'bold' }}>SENSOR DATA</Text>
+      <Text style={{ fontSize: 18, fontFamily: 'Rubik-Regular' }}>
+        Sensor Data
+      </Text>
       <Picker
         selectedValue={sahhaSensor}
         onValueChange={(sensor) => {
@@ -18,16 +27,12 @@ export default function SensorDataView() {
         }}
       >
         {Object.values(SahhaSensor).map((sensor, index) => (
-          <Picker.Item
-            label={sensor.toUpperCase()}
-            value={sensor}
-            key={index}
-          />
+          <Picker.Item label={sensor} value={sensor} key={index} />
         ))}
       </Picker>
       <View style={styles.divider} />
-      <Button
-        title="GET DATA"
+      <TouchableOpacity
+        style={styles.touchable}
         onPress={() => {
           Sahha.getSensorData(sahhaSensor, (error: string, success: string) => {
             setData('');
@@ -35,10 +40,12 @@ export default function SensorDataView() {
             if (success) setData(success);
           });
         }}
-      />
+      >
+        <Text style={styles.touchableText}>Get Data</Text>
+      </TouchableOpacity>
       <ScrollView style={{ marginVertical: 16 }}>
         <ScrollView horizontal={true}>
-          <Text>{sensorData}</Text>
+          <Text style={{ fontFamily: 'Rubik-Regular' }}>{sensorData}</Text>
         </ScrollView>
       </ScrollView>
     </View>
@@ -56,5 +63,15 @@ const styles = StyleSheet.create({
     height: 1,
     margin: 20,
     backgroundColor: '#cccccc',
+  },
+  touchable: {
+    backgroundColor: '#333242',
+    padding: 8,
+    borderRadius: 5,
+  },
+  touchableText: {
+    color: 'white',
+    textAlign: 'center',
+    fontFamily: 'Rubik-Regular',
   },
 });

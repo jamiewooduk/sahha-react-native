@@ -1,53 +1,71 @@
 import React from 'react';
-import { View, StyleSheet, Image, ScrollView, Button } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Image,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import { PageTitle } from './App';
-import Sahha, { SahhaEnvironment, SahhaSensor } from 'sahha-react-native';
 
 export default function HomeView({ navigation }) {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Image style={styles.logo} source={require('../assets/sahha-logo.png')} />
-      <Button
-        title={PageTitle.AUTHENTICATION.toString()}
+      <TouchableOpacity
         onPress={() => {
-          navigation.navigate(PageTitle.AUTHENTICATION.toString());
+          navigation.navigate(PageTitle.AUTHENTICATION);
         }}
-      />
-      <View style={styles.divider} />
-      <Button
-        title={PageTitle.PROFILE.toString()}
+        style={styles.touchable}
+      >
+        <Text style={styles.touchableText}>{PageTitle.AUTHENTICATION}</Text>
+      </TouchableOpacity>
+      {/* <View style={styles.divider} /> */}
+      <TouchableOpacity
         onPress={() => {
-          navigation.navigate(PageTitle.PROFILE.toString());
+          navigation.navigate(PageTitle.PROFILE);
         }}
-      />
-      <View style={styles.divider} />
-      <Button
-        title={PageTitle.SLEEP.toString()}
+        style={styles.touchable}
+      >
+        <Text style={styles.touchableText}>{PageTitle.PROFILE}</Text>
+      </TouchableOpacity>
+      {/* <View style={styles.divider} /> */}
+      <TouchableOpacity
         onPress={() => {
-          navigation.navigate(PageTitle.SLEEP.toString());
+          navigation.navigate(PageTitle.SLEEP);
         }}
-      />
-      <View style={styles.divider} />
-      <Button
-        title={PageTitle.PEDOMETER.toString()}
+        style={styles.touchable}
+      >
+        <Text style={styles.touchableText}>{PageTitle.SLEEP}</Text>
+      </TouchableOpacity>
+      {/* <View style={styles.divider} /> */}
+      <TouchableOpacity
         onPress={() => {
-          navigation.navigate(PageTitle.PEDOMETER.toString());
+          navigation.navigate(PageTitle.PEDOMETER);
         }}
-      />
-      <View style={styles.divider} />
-      <Button
-        title={PageTitle.ANALYZATION.toString()}
+        style={styles.touchable}
+      >
+        <Text style={styles.touchableText}>{PageTitle.PEDOMETER}</Text>
+      </TouchableOpacity>
+      {/* <View style={styles.divider} /> */}
+      <TouchableOpacity
         onPress={() => {
-          navigation.navigate(PageTitle.ANALYZATION.toString());
+          navigation.navigate(PageTitle.ANALYZATION);
         }}
-      />
-      <View style={styles.divider} />
-      <Button
-        title={PageTitle.SENSOR_DATA.toString()}
+        style={styles.touchable}
+      >
+        <Text style={styles.touchableText}>{PageTitle.ANALYZATION}</Text>
+      </TouchableOpacity>
+      {/* <View style={styles.divider} /> */}
+      <TouchableOpacity
         onPress={() => {
-          navigation.navigate(PageTitle.SENSOR_DATA.toString());
+          navigation.navigate(PageTitle.SENSOR_DATA);
         }}
-      />
+        style={styles.touchable}
+      >
+        <Text style={styles.touchableText}>{PageTitle.SENSOR_DATA}</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 }
@@ -69,5 +87,16 @@ const styles = StyleSheet.create({
     scaleY: 0.7,
     alignSelf: 'center',
     marginBottom: 40,
+  },
+  touchable: {
+    backgroundColor: '#333242',
+    padding: 8,
+    borderRadius: 5,
+    marginVertical: 12,
+  },
+  touchableText: {
+    color: 'white',
+    textAlign: 'center',
+    fontFamily: 'Rubik-Regular',
   },
 });

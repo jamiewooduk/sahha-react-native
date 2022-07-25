@@ -6,6 +6,7 @@ import {
   TextInput,
   Button,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -151,7 +152,7 @@ export default function ProfileView() {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Text>AGE</Text>
+        <Text style={styles.text}>Age</Text>
         <TextInput
           style={styles.input}
           keyboardType="number-pad"
@@ -172,7 +173,7 @@ export default function ProfileView() {
           placeholder="1 - 100"
         />
         <View style={styles.divider} />
-        <Text>GENDER</Text>
+        <Text style={styles.text}>Gender</Text>
         <Picker
           selectedValue={gender}
           onValueChange={(itemValue) => {
@@ -184,7 +185,7 @@ export default function ProfileView() {
           <Picker.Item label="Gender Diverse" value={'Gender Diverse'} />
         </Picker>
         <View style={styles.divider} />
-        <Text>COUNTRY</Text>
+        <Text style={styles.text}>Country</Text>
         <TextInput
           style={styles.input}
           keyboardType="numbers-and-punctuation"
@@ -197,7 +198,7 @@ export default function ProfileView() {
           placeholder="2 letter Country code e.g. US"
         />
         <View style={styles.divider} />
-        <Text>COUNTRY OF BIRTH</Text>
+        <Text style={styles.text}>Country of Birth</Text>
         <TextInput
           style={styles.input}
           keyboardType="numbers-and-punctuation"
@@ -210,7 +211,7 @@ export default function ProfileView() {
           placeholder="2 letter Country code e.g. US"
         />
         <View style={styles.divider} />
-        <Text>ETHNICITY</Text>
+        <Text style={styles.text}>Ethnicity</Text>
         <TextInput
           style={styles.input}
           keyboardType="numbers-and-punctuation"
@@ -223,7 +224,7 @@ export default function ProfileView() {
           placeholder="E.g. European"
         />
         <View style={styles.divider} />
-        <Text>OCCUPATION</Text>
+        <Text style={styles.text}>Occupation</Text>
         <TextInput
           style={styles.input}
           keyboardType="numbers-and-punctuation"
@@ -236,7 +237,7 @@ export default function ProfileView() {
           placeholder="E.g. Project Manager"
         />
         <View style={styles.divider} />
-        <Text>INDUSTRY</Text>
+        <Text style={styles.text}>Industry</Text>
         <TextInput
           style={styles.input}
           keyboardType="numbers-and-punctuation"
@@ -249,7 +250,7 @@ export default function ProfileView() {
           placeholder="E.g. Information Technology"
         />
         <View style={styles.divider} />
-        <Text>INCOME</Text>
+        <Text style={styles.text}>Income</Text>
         <TextInput
           style={styles.input}
           keyboardType="numbers-and-punctuation"
@@ -262,7 +263,7 @@ export default function ProfileView() {
           placeholder="E.g. Up to 100K"
         />
         <View style={styles.divider} />
-        <Text>EDUCATION</Text>
+        <Text style={styles.text}>Education</Text>
         <TextInput
           style={styles.input}
           keyboardType="numbers-and-punctuation"
@@ -275,7 +276,7 @@ export default function ProfileView() {
           placeholder="E.g. Tertiary"
         />
         <View style={styles.divider} />
-        <Text>RELATIONSHIP</Text>
+        <Text style={styles.text}>Relationship</Text>
         <TextInput
           style={styles.input}
           keyboardType="numbers-and-punctuation"
@@ -288,7 +289,7 @@ export default function ProfileView() {
           placeholder="E.g. Single"
         />
         <View style={styles.divider} />
-        <Text>LOCALE</Text>
+        <Text style={styles.text}>Locale</Text>
         <TextInput
           style={styles.input}
           keyboardType="numbers-and-punctuation"
@@ -301,7 +302,7 @@ export default function ProfileView() {
           placeholder="E.g. Urban"
         />
         <View style={styles.divider} />
-        <Text>LIVING ARRANGEMENT</Text>
+        <Text style={styles.text}>Living Arrangement</Text>
         <TextInput
           style={styles.input}
           keyboardType="numbers-and-punctuation"
@@ -314,7 +315,7 @@ export default function ProfileView() {
           placeholder="E.g. Renting"
         />
         <View style={styles.divider} />
-        <Text>BIRTH DATE</Text>
+        <Text style={styles.text}>Birth Date</Text>
         <TextInput
           style={styles.input}
           keyboardType="numeric"
@@ -327,7 +328,9 @@ export default function ProfileView() {
           placeholder="yyyy-mm-dd"
         />
         <View style={styles.divider} />
-        <Button title="SAVE" onPress={savePrefs} />
+        <TouchableOpacity style={styles.touchable} onPress={savePrefs}>
+          <Text style={styles.touchableText}>Save</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -360,14 +363,27 @@ const styles = StyleSheet.create({
   divider: {
     height: 1,
     margin: 20,
-    // width: '80%',
     backgroundColor: '#cccccc',
   },
   input: {
     height: 40,
-    margin: 12,
-    // width: '80%',
+    marginVertical: 12,
+    borderRadius: 5,
     borderWidth: 1,
     padding: 10,
+    fontFamily: 'Rubik-Regular',
+  },
+  touchable: {
+    backgroundColor: '#333242',
+    padding: 8,
+    borderRadius: 5,
+  },
+  touchableText: {
+    color: 'white',
+    textAlign: 'center',
+    fontFamily: 'Rubik-Regular',
+  },
+  text: {
+    fontFamily: 'Rubik-Regular',
   },
 });

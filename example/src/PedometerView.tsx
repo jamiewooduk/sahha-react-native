@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Text, ScrollView, Button } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  ScrollView,
+  Button,
+  TouchableOpacity,
+} from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import Sahha, { SahhaSensor, SahhaSensorStatus } from 'sahha-react-native';
 
@@ -29,8 +36,14 @@ export default function PedometerView() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={{ fontSize: 18, fontWeight: 'bold', alignSelf: 'center' }}>
-        SENSOR STATUS
+      <Text
+        style={{
+          fontSize: 18,
+          alignSelf: 'center',
+          fontFamily: 'Rubik-Regular',
+        }}
+      >
+        Sensor Status
       </Text>
       <Picker enabled={false} selectedValue={sensorStatus}>
         <Picker.Item label="Pending" value={0} />
@@ -39,8 +52,8 @@ export default function PedometerView() {
         <Picker.Item label="Enabled" value={3} />
       </Picker>
       <View style={styles.divider} />
-      <Button
-        title="ENABLE"
+      <TouchableOpacity
+        style={isDisabled ? styles.touchableDisabled : styles.touchable}
         disabled={isDisabled}
         onPress={() => {
           console.log('press');
@@ -60,14 +73,24 @@ export default function PedometerView() {
             );
           }
         }}
-      />
+      >
+        <Text
+          style={
+            isDisabled ? styles.touchableTextDisabled : styles.touchableText
+          }
+        >
+          Enable
+        </Text>
+      </TouchableOpacity>
       <View style={styles.divider} />
-      <Button
-        title={'OPEN APP SETTINGS'}
+      <TouchableOpacity
+        style={styles.touchable}
         onPress={() => {
           Sahha.openAppSettings();
         }}
-      />
+      >
+        <Text style={styles.touchableText}>Open App Settings</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 }
@@ -83,5 +106,25 @@ const styles = StyleSheet.create({
     height: 1,
     margin: 20,
     backgroundColor: '#cccccc',
+  },
+  touchable: {
+    backgroundColor: '#333242',
+    padding: 8,
+    borderRadius: 5,
+  },
+  touchableDisabled: {
+    backgroundColor: 'lightgray',
+    padding: 8,
+    borderRadius: 5,
+  },
+  touchableText: {
+    color: 'white',
+    textAlign: 'center',
+    fontFamily: 'Rubik-Regular',
+  },
+  touchableTextDisabled: {
+    color: 'gray',
+    textAlign: 'center',
+    fontFamily: 'Rubik-Regular',
   },
 });

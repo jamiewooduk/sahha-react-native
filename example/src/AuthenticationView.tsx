@@ -5,8 +5,8 @@ import {
   StyleSheet,
   Text,
   ScrollView,
-  Button,
   TextInput,
+  TouchableOpacity,
 } from 'react-native';
 import Sahha from 'sahha-react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -108,9 +108,13 @@ export default function AuthenticationView() {
         placeholder="ABC123"
       />
       <View style={styles.divider} />
-      <Button title="AUTHENTICATE" onPress={onPressAuthenticate} />
+      <TouchableOpacity style={styles.touchable} onPress={onPressAuthenticate}>
+        <Text style={styles.touchableText}>Authenticate</Text>
+      </TouchableOpacity>
       <View style={styles.divider} />
-      <Button title="DELETE" onPress={onPressDelete} />
+      <TouchableOpacity style={styles.touchable} onPress={onPressDelete}>
+        <Text style={styles.touchableText}>Delete</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 }
@@ -130,11 +134,24 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    margin: 12,
+    marginVertical: 12,
     borderWidth: 1,
+    borderRadius: 5,
     padding: 10,
+    fontFamily: 'Rubik-Regular',
   },
   authStatus: {
     alignSelf: 'center',
+    fontFamily: 'Rubik-Regular',
+  },
+  touchable: {
+    backgroundColor: '#333242',
+    padding: 8,
+    borderRadius: 5,
+  },
+  touchableText: {
+    color: 'white',
+    textAlign: 'center',
+    fontFamily: 'Rubik-Regular',
   },
 });

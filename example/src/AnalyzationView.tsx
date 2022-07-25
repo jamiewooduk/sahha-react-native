@@ -4,8 +4,8 @@ import {
   StyleSheet,
   Text,
   ScrollView,
-  Button,
   Switch,
+  TouchableOpacity,
 } from 'react-native';
 import Sahha from 'sahha-react-native';
 
@@ -17,11 +17,17 @@ export default function ProfileView() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={{ textAlign: 'center' }}>
+      <Text style={{ textAlign: 'center', fontFamily: 'Rubik-Regular' }}>
         A new analysis will be available every 24 hours
       </Text>
       <View style={styles.divider} />
-      <Text style={{ textAlign: 'center', paddingBottom: 20 }}>
+      <Text
+        style={{
+          textAlign: 'center',
+          paddingBottom: 20,
+          fontFamily: 'Rubik-Regular',
+        }}
+      >
         Include source data in analysis
       </Text>
       <Switch
@@ -30,8 +36,8 @@ export default function ProfileView() {
         style={{ alignSelf: 'center' }}
       />
       <View style={styles.divider} />
-      <Button
-        title="ANALYZE PREVIOUS WEEK"
+      <TouchableOpacity
+        style={styles.touchable}
         onPress={() => {
           let endDate: Date = new Date();
           let days = endDate.getDate() - 7;
@@ -51,10 +57,12 @@ export default function ProfileView() {
             }
           });
         }}
-      />
+      >
+        <Text style={styles.touchableText}>Analyze Previous Week</Text>
+      </TouchableOpacity>
       <View style={styles.divider} />
-      <Button
-        title="ANALYZE PREVIOUS DAY"
+      <TouchableOpacity
+        style={styles.touchable}
         onPress={() => {
           const settings = {
             includeSourceData: isSwitchEnabled,
@@ -68,9 +76,11 @@ export default function ProfileView() {
             }
           });
         }}
-      />
+      >
+        <Text style={styles.touchableText}>Analyze Previous Day</Text>
+      </TouchableOpacity>
       <View style={styles.divider} />
-      <Text>{jsonString}</Text>
+      <Text style={{ fontFamily: 'Rubik-Regular' }}>{jsonString}</Text>
     </ScrollView>
   );
 }
@@ -86,5 +96,15 @@ const styles = StyleSheet.create({
     height: 1,
     margin: 20,
     backgroundColor: '#cccccc',
+  },
+  touchable: {
+    backgroundColor: '#333242',
+    padding: 8,
+    borderRadius: 5,
+  },
+  touchableText: {
+    color: 'white',
+    textAlign: 'center',
+    fontFamily: 'Rubik-Regular',
   },
 });
