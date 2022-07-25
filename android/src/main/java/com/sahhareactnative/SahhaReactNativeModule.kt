@@ -3,6 +3,7 @@ package com.sahhareactnative
 import android.util.Log
 import com.facebook.react.bridge.*
 import com.google.gson.Gson
+import org.json.JSONArray
 import sdk.sahha.android.common.SahhaConverterUtility
 import sdk.sahha.android.domain.model.config.SahhaNotificationConfiguration
 import sdk.sahha.android.source.*
@@ -217,9 +218,9 @@ class SahhaReactNativeModule(reactContext: ReactApplicationContext) :
   fun getSensorData(sensor: String, callback: Callback) {
     try {
       val sahhaSensor = SahhaSensor.valueOf(sensor)
-      Sahha.getSensorData(sahhaSensor) { error, success ->
+      Sahha.getSensorData(sahhaSensor) { error: String?, success: JSONArray? ->
         error?.also { callback(it, null) }
-        success?.also { callback(null, it) }
+        success?.also { callback(null, it.toString(6)) }
       }
     } catch (e: IllegalArgumentException) {
       callback.invoke("Sahha sensor parameter is not valid", null)
@@ -228,7 +229,6 @@ class SahhaReactNativeModule(reactContext: ReactApplicationContext) :
 
   @ReactMethod
   fun postSensorData(settings: ReadableMap, callback: Callback) {
-
     var sensors: ReadableArray? = settings.getArray("sensors")
     if (sensors == null) {
       Sahha.postSensorData { error, success ->

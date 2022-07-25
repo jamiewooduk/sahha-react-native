@@ -37,7 +37,9 @@ export default function SensorDataView() {
         }}
       />
       <ScrollView style={{ marginVertical: 16 }}>
-        <Text>{sensorData}</Text>
+        <ScrollView horizontal={true}>
+          <Text>{sensorData}</Text>
+        </ScrollView>
       </ScrollView>
     </View>
   );
