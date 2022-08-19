@@ -4,7 +4,6 @@ import android.util.Log
 import com.facebook.react.bridge.*
 import com.google.gson.Gson
 import sdk.sahha.android.source.*
-import java.time.LocalDateTime
 import java.util.*
 
 class SahhaReactNativeModule(reactContext: ReactApplicationContext) :
@@ -168,18 +167,21 @@ class SahhaReactNativeModule(reactContext: ReactApplicationContext) :
   }
 
   @ReactMethod
-  fun getSensorStatus(sensor: String, callback: Callback) {
-
+  fun getSensorStatuses(sensors: ReadableArray, callback: Callback) {
     try {
-      var sahhaSensor = SahhaSensor.valueOf(sensor)
-      Sahha.getSensorStatus(
+      val sensorsSet = mutableSetOf<SahhaSensor>()
+      sensors.toArrayList().forEach {
+        sensorsSet.add(SahhaSensor.valueOf(it as String))
+      }
+
+      Sahha.getSensorStatuses(
         reactApplicationContext.baseContext,
-        sahhaSensor
-      ) { error, sensorStatus ->
+        sensorsSet
+      ) { error, sensorStatuses ->
         if (error != null) {
           callback.invoke(error, null)
         } else {
-          callback.invoke(null, sensorStatus.ordinal)
+          callback.invoke(null, sensorStatuses)
         }
       }
     } catch (e: IllegalArgumentException) {
@@ -190,18 +192,18 @@ class SahhaReactNativeModule(reactContext: ReactApplicationContext) :
   @ReactMethod
   fun enableSensor(sensor: String, callback: Callback) {
 
-    try {
-      var sahhaSensor = SahhaSensor.valueOf(sensor)
-      Sahha.enableSensor(reactApplicationContext.baseContext, sahhaSensor) { error, sensorStatus ->
-        if (error != null) {
-          callback.invoke(error, null)
-        } else {
-          callback.invoke(null, sensorStatus.ordinal)
-        }
-      }
-    } catch (e: IllegalArgumentException) {
-      callback.invoke("Sahha sensor parameter is not valid", null)
-    }
+//    try {
+//      var sahhaSensor = SahhaSensor.valueOf(sensor)
+//      Sahha.enableSensor(reactApplicationContext.baseContext, sahhaSensor) { error, sensorStatus ->
+//        if (error != null) {
+//          callback.invoke(error, null)
+//        } else {
+//          callback.invoke(null, sensorStatus.ordinal)
+//        }
+//      }
+//    } catch (e: IllegalArgumentException) {
+//      callback.invoke("Sahha sensor parameter is not valid", null)
+//    }
   }
 
   @ReactMethod

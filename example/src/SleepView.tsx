@@ -14,14 +14,14 @@ export default function SleepView() {
 
   useEffect(() => {
     console.log('sleep');
-    Sahha.getSensorStatus(
-      SahhaSensor.sleep,
-      (error: string, value: SahhaSensorStatus) => {
+    Sahha.getSensorStatuses(
+      [SahhaSensor.sleep, SahhaSensor.pedometer],
+      (error: string, value: Map<SahhaSensor, SahhaSensorStatus>) => {
         if (error) {
           console.error(`Error: ${error}`);
         } else if (value) {
-          console.log(`Sensor Status: ${value}`);
-          setSensorStatus(value);
+          console.log(`Sensor Statuses: ${value}`);
+          // setSensorStatus(value);
         }
       }
     );
