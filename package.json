@@ -146,6 +146,6 @@
     ]
   },
   "dependencies": {
-    "sahha-react-native": "^0.0.7"
+    "sahha-react-native": "^0.4.4"
   }
 }
